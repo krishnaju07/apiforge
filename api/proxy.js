@@ -35,6 +35,10 @@ module.exports = async function handler(req, res) {
   });
   fwdHeaders['host'] = target.host;
   fwdHeaders['accept-encoding'] = 'identity';
+  // Add browser-like user-agent if none provided (helps pass WAF bot detection)
+  if (!Object.keys(fwdHeaders).some(k => k.toLowerCase() === 'user-agent')) {
+    fwdHeaders['user-agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
+  }
   if (bodyBuf) fwdHeaders['content-length'] = bodyBuf.length;
 
   return new Promise((resolve) => {
