@@ -1,0 +1,98 @@
+.url-bar {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--bg1);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  align-items: center;
+}
+.method-select {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  font-weight: 700;
+  font-size: 12px;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  flex-shrink: 0;
+  min-width: 90px;
+}
+.method-select:focus { outline: none; border-color: var(--accent); }
+.url-input {
+  flex: 1;
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 9px 13px;
+  color: var(--text1);
+  font-size: 13px;
+  font-family: var(--font-mono);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.url-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-dim);
+}
+.url-copy-curl {
+  padding: 8px 10px !important;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.url-send-btn {
+  padding: 9px 24px !important;
+  font-size: 13px !important;
+  letter-spacing: 0.3px;
+  flex-shrink: 0;
+}
+.url-save-wrap { position: relative; flex-shrink: 0; }
+.url-save-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 6px;
+  min-width: 200px;
+  z-index: 100;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  animation: fadeIn 0.1s ease;
+}
+.url-save-menu-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 10px 8px;
+}
+.url-save-menu-item {
+  display: block; width: 100%;
+  text-align: left; padding: 8px 12px;
+  font-size: 12px; color: var(--text2);
+  border-radius: 6px; transition: all 0.1s;
+}
+.url-save-menu-item:hover { background: var(--bg3); color: var(--text1); }
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .url-bar { padding: 8px 10px; gap: 6px; }
+  .url-send-btn { padding: 8px 16px !important; font-size: 12px !important; }
+}
+
+@media (max-width: 580px) {
+  .url-bar { flex-wrap: wrap; padding: 8px; gap: 6px; }
+  .method-select { flex: 0 0 auto; order: 1; }
+  .url-input { flex: 1 1 auto; order: 2; min-width: 0; }
+  .url-copy-curl { order: 3; }
+  .url-save-wrap { order: 4; }
+  .url-send-btn { order: 5; width: 100%; justify-content: center; }
+}
+
+@media (max-width: 400px) {
+  .url-copy-curl { display: none; }
+  .url-save-wrap { display: none; }
+  .url-send-btn { width: auto; flex: 1; }
+}
