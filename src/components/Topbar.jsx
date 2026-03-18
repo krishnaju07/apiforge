@@ -6,7 +6,7 @@ import './Topbar.css';
 
 export default function Topbar() {
   const { sidebarOpen, setSidebarOpen, environments, activeEnvId, setActiveEnv,
-    addEnvironment, collections, importCollections, setCollections,
+    addEnvironment, collections, importCollections,
     setRunnerOpen, getActiveTab } = useStore();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef();

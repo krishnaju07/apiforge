@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Editor from '@monaco-editor/react';
-import useStore, { makeKVRow } from '../store';
+import useStore from '../store';
 import toast from 'react-hot-toast';
 import './RequestPanel.css';
 
@@ -39,7 +39,6 @@ function KVEditor({ tabId, field, cols = 3 }) {
   const tab = getActiveTab();
   if (!tab) return null;
   const rows = tab[field] || [];
-  const enabled = rows.filter(r => r.enabled && r.key).length;
 
   return (
     <div className="kv-editor">
@@ -198,7 +197,7 @@ function BodyEditor({ tab }) {
 
 // ── Auth Editor ───────────────────────────────────────────
 function AuthEditor({ tab }) {
-  const { updateTabDeep, updateTab } = useStore();
+  const { updateTabDeep } = useStore();
   const auth = tab.auth;
 
   const upAuth = (field, val) => updateTabDeep(tab.id, `auth.${field}`, val);

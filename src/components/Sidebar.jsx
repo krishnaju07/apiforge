@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import useStore, { METHOD_COLORS, makeTab } from '../store';
+import useStore, { METHOD_COLORS } from '../store';
 import toast from 'react-hot-toast';
 import './Sidebar.css';
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import useStore, { METHODS, METHOD_COLORS, makeKVRow } from '../store';
 import { parseCurl, generateCurl } from '../utils/request';
 import { executeRequest, runPreScript, runTests, abortControllers } from '../utils/request';
