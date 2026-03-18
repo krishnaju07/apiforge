@@ -7,7 +7,7 @@ import './Topbar.css';
 export default function Topbar() {
   const { sidebarOpen, setSidebarOpen, environments, activeEnvId, setActiveEnv,
     addEnvironment, collections, importCollections,
-    setRunnerOpen, getActiveTab } = useStore();
+    setRunnerOpen, getActiveTab, proxyEnabled, setProxyEnabled } = useStore();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef();
 
@@ -16,6 +16,10 @@ export default function Topbar() {
     document.addEventListener('mousedown', h);
     return () => document.removeEventListener('mousedown', h);
   }, []);
+
+  useEffect(() => {
+    window.__apiforgeProxyEnabled = proxyEnabled;
+  }, [proxyEnabled]);
 
   const exportCollections = () => {
     const data = JSON.stringify({ type: 'apiforge', version: '1.0', collections }, null, 2);
@@ -98,6 +102,19 @@ export default function Topbar() {
           ))}
         </select>
       </div>
+
+      {/* Proxy toggle button */}
+        <button
+          className={`btn btn-ghost topbar-proxy-btn ${proxyEnabled ? 'proxy-on' : 'proxy-off'}`}
+          onClick={() => {
+            const next = !proxyEnabled;
+            setProxyEnabled(next);
+            window.__apiforgeProxyEnabled = next;
+          }}
+          title={proxyEnabled ? 'Proxy ON — requests go through server (fixes CORS). Click to use Direct mode.' : 'Direct mode — requests go from your browser. Click to enable Proxy.'}
+        >
+          {proxyEnabled ? '🔀 Proxy' : '⚡ Direct'}
+        </button>
 
       {/* Runner button */}
       <button className="btn btn-ghost topbar-runner-btn" onClick={() => setRunnerOpen(true)}>

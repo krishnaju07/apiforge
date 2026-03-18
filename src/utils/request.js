@@ -95,7 +95,20 @@ export async function executeRequest(tab, resolveEnv, signal) {
     return _buildDirectResult(res, finalUrl, start);
   }
 
-  // All other requests go through the local dev-server proxy (/apiforge-proxy)
+  // If proxy disabled by user, go direct from browser (works when browser has network access to API)
+  const proxyEnabled = typeof window !== 'undefined'
+    ? (window.__apiforgeProxyEnabled !== undefined ? window.__apiforgeProxyEnabled : true)
+    : true;
+
+  if (!proxyEnabled) {
+    const res = await fetch(finalUrl, {
+      method, headers, signal, redirect: 'follow',
+      body: !['GET', 'HEAD'].includes(method) && body !== undefined ? body : undefined,
+    });
+    return _buildDirectResult(res, finalUrl, start);
+  }
+
+  // All other requests go through the proxy (/apiforge-proxy in dev, /api/proxy on Vercel)
   // so Node.js makes the actual call — no CORS restrictions, any header allowed.
   const proxyBody = !['GET', 'HEAD'].includes(method) && body !== undefined ? body : null;
   let proxyRes;

@@ -92,3 +92,8 @@
   .topbar-env-select { min-width: 72px; font-size: 11px; padding: 4px 6px; }
   .topbar-runner-btn { padding: 5px 10px !important; font-size: 11px !important; }
 }
+.topbar-proxy-btn { font-size: 11px !important; font-weight: 600 !important; }
+.proxy-on { color: var(--accent) !important; border-color: rgba(255,108,55,0.3) !important; }
+.proxy-off { color: #61AFFE !important; border-color: rgba(97,175,254,0.3) !important; }
+.proxy-on:hover { background: var(--accent-dim) !important; }
+.proxy-off:hover { background: rgba(97,175,254,0.1) !important; }

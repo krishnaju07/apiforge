@@ -284,6 +284,8 @@ const useStore = create(immer((set, get) => ({
   // ── Runner ───────────────────────────────────
   runnerOpen: false,
   setRunnerOpen: (v) => set(s => { s.runnerOpen = v; }),
+  proxyEnabled: LS.load('proxyEnabled', true),
+  setProxyEnabled: (v) => set(s => { s.proxyEnabled = v; LS.save('proxyEnabled', v); }),
 
   // ── UI state ─────────────────────────────────
   sidebarOpen: true,
